@@ -22,18 +22,28 @@ def main():
             
         model = YOLO(model_path)
         
-        # Perform prediction
-        results = model.predict(
-            source="data/samples/test.jpg",
-            conf=0.25,
-            iou=0.5,
-            device="mps",
-            save=True,
-            show_labels=True,
-            show_conf=True
-        )
+        # Get all jpg files from the data/samples/ directory
+        input_dir = Path("data/samples/")
+        jpg_files = list(input_dir.glob("*.jpg"))  # Get all .jpg files
         
-        logging.info("Prediction completed successfully")
+        if not jpg_files:
+            raise FileNotFoundError("No .jpg files found in the 'data/samples/' directory.")
+        
+        # Perform prediction for each image in the directory
+        for image_path in jpg_files:
+            logging.info(f"Predicting on {image_path}")
+            
+            results = model.predict(
+                source=str(image_path),
+                conf=0.25,
+                iou=0.5,
+                device="mps",
+                save=True,
+                show_labels=True,
+                show_conf=True
+            )
+            
+            logging.info(f"Prediction completed for {image_path}")
         
     except Exception as e:
         logging.error(f"Prediction failed: {str(e)}")

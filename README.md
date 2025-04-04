@@ -1,6 +1,8 @@
 
 # Logo Detection with YOLOv8
 
+![Example Image](example.jpg)
+
 This project aims to extract logos (patterns) from clothing, hats, socks, etc. using YOLOv8 for object detection. The dataset is a subset of the [LogoDet-3K Dataset](https://github.com/Wangjing1551/LogoDet-3K-Dataset?tab=readme-ov-file).
 
 ## Setup
